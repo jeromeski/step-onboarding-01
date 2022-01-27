@@ -1,51 +1,28 @@
-import Form from "./components/Form";
-import PasswordInput from "./components/PasswordInput";
-import TextInput from "./components/TextInput";
+import { useState } from "react";
+import FormOnboardingFlow from "./components/FormOnboardingFlow";
+import FormStepOne from "./components/FormStepOne";
+import FormStepTwo from "./components/FormStepTwo";
+
 import "./styles.css";
 
 export default function App() {
+  const [onboardingData, setOnboardingData] = useState({});
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToNext = (stepData) => {
+    setOnboardingData({
+      ...stepData,
+      ...onboardingData
+    });
+
+    setCurrentIndex(currentIndex + 1);
+  };
   return (
     <div className="App">
-      <Form>
-        <TextInput type="email" id="email" placeholder="" label="* Email ID" />
-        <TextInput
-          type="email"
-          id="confirmEmail"
-          placeholder=""
-          label="* Confirm Email ID"
-        />
-        <TextInput
-          type="text"
-          id="firstName"
-          placeholder="First Name (Required)"
-          label="* Owner/Representative:"
-        />
-        <TextInput
-          type="text"
-          id="middleName"
-          placeholder="Middle Name (Required)"
-        />
-        <TextInput
-          type="text"
-          id="lastName"
-          placeholder="Last Name (Required)"
-        />
-        <TextInput
-          type="text"
-          id="gender"
-          placeholder="Male"
-          label="* Gender"
-        />
-        <TextInput
-          type="tel"
-          id="phone"
-          placeholder="09xxxxxxxxx"
-          label="* Contact Number"
-        />
-        <PasswordInput id="password" label="* Password" />
-        <PasswordInput id="password2" label="* Confirm Password" />
-        <button type="submit">submit</button>
-      </Form>
+      <FormOnboardingFlow goToNext={goToNext} currentIndex={currentIndex}>
+        <FormStepOne />
+        <FormStepTwo />
+      </FormOnboardingFlow>
     </div>
   );
 }
