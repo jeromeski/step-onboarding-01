@@ -11,7 +11,6 @@ export default function FormOnboardingFlow({
 	onSubmit
 }) {
 	const currentChild = React.Children.toArray(children)[currentIndex];
-	// const innerRef = useRef();
 
 	const validationSchema = Yup.object({
 		accountType: Yup.string().required("Choose one!"),
@@ -45,13 +44,7 @@ export default function FormOnboardingFlow({
 						});
 						return handleChange(e);
 					};
-					return (
-						<Form
-						// ref={innerRef}
-						>
-							{React.cloneElement(currentChild, { onChange, isValid, touched })}
-						</Form>
-					);
+					return <Form>{React.cloneElement(currentChild, { onChange, isValid, touched })}</Form>;
 				}}
 			</Formik>
 		);

@@ -15,9 +15,11 @@ function Select({ label, name, options, onChange, ...rest }) {
 				as="select"
 				onChange={(e) => {
 					helpers.setValue(e.target.value);
-          onChange(e)
+					onChange(e);
 				}}>
-        <option disabled value="">(Make a selection)</option>
+				<option disabled value="">
+					(Make a selection)
+				</option>
 				{options.map((option) => (
 					<option key={option.key} value={option.value}>
 						{option.value}
@@ -41,4 +43,4 @@ export default Select;
 					);
         })}
       </Field>
-*/ 
+*/

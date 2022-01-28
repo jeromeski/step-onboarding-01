@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
-import PasswordInput from "./PasswordInput";
-import RadioButtons from './RadioButtons';
-import Select from './Select';
-import TextInput from "./TextInput";
+import PasswordInput from "../elements/PasswordInput";
+import RadioButtons from "../elements/RadioButtons";
+import Select from "../elements/Select";
+import TextInput from "../elements/TextInput";
 
 export default function FormStepOne({ onChange, isValid, touched }) {
 	const accountOptions = [
@@ -64,4 +64,3 @@ export default function FormStepOne({ onChange, isValid, touched }) {
 		</Fragment>
 	);
 }
-
