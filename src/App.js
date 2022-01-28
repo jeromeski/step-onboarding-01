@@ -27,47 +27,41 @@ export default function App() {
 
   console.log(onboardingData);
 
-  const goToNext = (stepData) => {
-    setOnboardingData({
-      ...stepData,
-      ...onboardingData
-    });
-    if (currentIndex === 2) {
-      onSubmit(onboardingData);
-      return;
-    }
-    setCurrentIndex(currentIndex + 1);
-  };
-
   const goToPrev = () => {
-    if (currentIndex <= 0) {
-      return;
-    }
-    setCurrentIndex(currentIndex - 1);
-  };
+		if (currentIndex <= 0) {
+			return;
+		}
+		setCurrentIndex(currentIndex - 1);
+	};
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(onboardingData);
-  };
+	const onSubmit = (values, helpers) => {
+		setOnboardingData({
+			...onboardingData,
+			...values
+		});
+		if (currentIndex === 2) {
+			return;
+		}
+		setCurrentIndex(currentIndex + 1);
+	};
 
-  return (
+	console.log(onboardingData);
+
+	return (
 		<div className="App">
 			<div className="container">
 				<div className="row">
 					<div className="col pl-5 pr-5">
-
-							<FormOnboardingFlow
-								currentIndex={currentIndex}
-								onSubmit={onSubmit}
-								initialValues={initialValues}
-								formValues={formValues}
-								setFormValues={setFormValues}>
-								<FormStepOne goToNext={goToNext} />
-								<FormStepTwo goToPrev={goToPrev} goToNext={goToNext} />
-								<SubmitPage goToPrev={goToPrev} />
-							</FormOnboardingFlow>
-
+						<FormOnboardingFlow
+							onSubmit={onSubmit}
+							currentIndex={currentIndex}
+							initialValues={initialValues}
+							formValues={formValues}
+							setFormValues={setFormValues}>
+							<FormStepOne />
+							<FormStepTwo goToPrev={goToPrev} />
+							<SubmitPage />
+						</FormOnboardingFlow>
 					</div>
 					<div className="col">
 						<FormikDebug formValues={formValues} />

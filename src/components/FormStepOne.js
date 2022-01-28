@@ -4,18 +4,18 @@ import RadioButtons from './RadioButtons';
 import Select from './Select';
 import TextInput from "./TextInput";
 
-export default function FormStepOne({ goToNext, onChange }) {
-  const accountOptions = [
+export default function FormStepOne({ onChange, isValid, touched }) {
+	const accountOptions = [
 		{ key: "Individual", value: "Individual" },
 		{ key: "Business", value: "Business" }
 	];
 
-  const genderOptions = [
-    {key: 1, value:"Male"},
-    {key: 2, value:"Female"}
-  ]
+	const genderOptions = [
+		{ key: 1, value: "Male" },
+		{ key: 2, value: "Female" }
+	];
 
-  return (
+	return (
 		<Fragment>
 			<RadioButtons
 				name="accountType"
@@ -46,7 +46,7 @@ export default function FormStepOne({ goToNext, onChange }) {
 				onChange={onChange}
 			/>
 			<TextInput name="lastName" type="text" label="" placeholder="Last Name" onChange={onChange} />
-			<Select name="gender" label="* Gender" options={genderOptions} onChange={onChange}/>
+			<Select name="gender" label="* Gender" options={genderOptions} onChange={onChange} />
 			<TextInput
 				name="mobileNo"
 				type="text"
@@ -56,7 +56,9 @@ export default function FormStepOne({ goToNext, onChange }) {
 			/>
 			<PasswordInput name="pword" type="password" label="* Password" onChange={onChange} />
 			<PasswordInput name="pword2" type="password" label="* Confirm Password" onChange={onChange} />
-			<button type="button" onClick={() => goToNext(data)}>
+			<button
+				disabled={!isValid || (Object.keys(touched).length === 0 && touched.constructor === Object)}
+				type="submit">
 				Next
 			</button>
 		</Fragment>
