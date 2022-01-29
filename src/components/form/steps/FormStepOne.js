@@ -4,7 +4,7 @@ import RadioButtons from "../elements/RadioButtons";
 import Select from "../elements/Select";
 import TextInput from "../elements/TextInput";
 
-export default function FormStepOne({ onChange, isValid, touched }) {
+export default function FormStepOne({ onChange, isValid, touched, resetForm }) {
 	const accountOptions = [
 		{ key: "Individual", value: "Individual" },
 		{ key: "Business", value: "Business" }
@@ -56,6 +56,9 @@ export default function FormStepOne({ onChange, isValid, touched }) {
 			/>
 			<PasswordInput name="pword" type="password" label="* Password" onChange={onChange} />
 			<PasswordInput name="pword2" type="password" label="* Confirm Password" onChange={onChange} />
+			<button type="button" onClick={() => resetForm()}>
+				Reset All
+			</button>
 			<button
 				disabled={!isValid || (Object.keys(touched).length === 0 && touched.constructor === Object)}
 				type="submit">

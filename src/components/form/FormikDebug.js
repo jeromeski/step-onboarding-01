@@ -5,7 +5,7 @@ export default function FormikDebug({ formValues }) {
 		<div className="container">
 			<div className="row">
 				<div className="col align-items-start">
-					<pre>{JSON.stringify(formValues, null, 4)}</pre>
+					<pre>{JSON.stringify(formValues, null, 2)}</pre>
 				</div>
 			</div>
 		</div>

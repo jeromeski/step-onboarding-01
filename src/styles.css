@@ -87,6 +87,10 @@
   width: 25%;
 }
 
+.p-5 {
+  padding:5px;
+}
+
 .form-control {
   display: flex;
   flex-direction: column;

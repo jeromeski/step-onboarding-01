@@ -3,31 +3,31 @@ import FormikDebug from "../../components/form/FormikDebug";
 import FormOnboardingFlow from "../../components/form/FormOnboardingFlow";
 import FormStepOne from "../../components/form/steps/FormStepOne";
 import FormStepTwo from "../../components/form/steps/FormStepTwo";
-import SubmitPage from "../../components/form/steps/SubmitPage";
+
+const initialValues = {
+	accountType: "",
+	email: "",
+	email2: "",
+	firstName: "",
+	middleName: "",
+	lastName: "",
+	gender: "",
+	mobileNo: "",
+	pword: "",
+	pword2: ""
+};
 
 export default function CheckoutPage() {
 	const [onboardingData, setOnboardingData] = useState({});
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [formValues, setFormValues] = useState(initialValues);
+	const [showModal, setShowModal] = useState(false);
 
-	const initialValues = {
-		accountType: "",
-		email: "",
-		email2: "",
-		firstName: "",
-		middleName: "",
-		lastName: "",
-		gender: "",
-		mobileNo: "",
-		pword: "",
-		pword2: ""
-	};
-
-	useEffect(() => {
-		if (onboardingData) {
-			console.log(onboardingData);
-		}
-	}, [onboardingData]);
+	// useEffect(() => {
+	// 	if (onboardingData) {
+	// 		console.log(onboardingData);
+	// 	}
+	// }, [onboardingData]);
 
 	const goToPrev = () => {
 		if (currentIndex <= 0) {
@@ -41,10 +41,20 @@ export default function CheckoutPage() {
 			...onboardingData,
 			...values
 		});
-		if (currentIndex === 2) {
+		if (currentIndex === 1) {
+			setShowModal(false);
+			helpers.resetForm();
+			setCurrentIndex(0);
+			console.log(onboardingData);
+			setOnboardingData({});
+			setFormValues(initialValues);
 			return;
 		}
 		setCurrentIndex(currentIndex + 1);
+	};
+
+	const handleConfirm = () => {
+		setShowModal(true);
 	};
 
 	return (
@@ -59,8 +69,12 @@ export default function CheckoutPage() {
 							formValues={formValues}
 							setFormValues={setFormValues}>
 							<FormStepOne />
-							<FormStepTwo goToPrev={goToPrev} />
-							<SubmitPage />
+							<FormStepTwo
+								goToPrev={goToPrev}
+								handleConfirm={handleConfirm}
+								showModal={showModal}
+								setShowModal={setShowModal}
+							/>
 						</FormOnboardingFlow>
 					</div>
 					<div className="col align-items-start h-full d-flex align-items-start">

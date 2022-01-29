@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
@@ -34,7 +34,8 @@ export default function FormOnboardingFlow({
 		return (
 			<Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
 				{(formik) => {
-					const { handleChange, isValid, touched } = formik;
+					const { handleChange, isValid, touched, resetForm } = formik;
+
 					const onChange = (e) => {
 						const targetEl = e.target;
 						const fieldName = targetEl.name;
@@ -44,10 +45,19 @@ export default function FormOnboardingFlow({
 						});
 						return handleChange(e);
 					};
-					return <Form>{React.cloneElement(currentChild, { onChange, isValid, touched })}</Form>;
+					return (
+						<Form>
+							{React.cloneElement(currentChild, {
+								onChange,
+								isValid,
+								touched,
+								resetForm
+							})}
+						</Form>
+					);
 				}}
 			</Formik>
 		);
 	}
-	return <></>;
+	return currentChild;
 }
