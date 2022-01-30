@@ -4,7 +4,14 @@ import RadioButtons from "../elements/RadioButtons";
 import Select from "../elements/Select";
 import TextInput from "../elements/TextInput";
 
-export default function FormStepOne({ onChange, isValid, touched, resetForm }) {
+export default function FormStepOne({
+	onChange,
+	isValid,
+	touched,
+	resetForm,
+	initialValues,
+	setFormValues
+}) {
 	const accountOptions = [
 		{ key: "Individual", value: "Individual" },
 		{ key: "Business", value: "Business" }
@@ -14,6 +21,11 @@ export default function FormStepOne({ onChange, isValid, touched, resetForm }) {
 		{ key: 1, value: "Male" },
 		{ key: 2, value: "Female" }
 	];
+
+	const handleFormReset = () => {
+		resetForm();
+		setFormValues(initialValues);
+	};
 
 	return (
 		<Fragment>
@@ -56,7 +68,7 @@ export default function FormStepOne({ onChange, isValid, touched, resetForm }) {
 			/>
 			<PasswordInput name="pword" type="password" label="* Password" onChange={onChange} />
 			<PasswordInput name="pword2" type="password" label="* Confirm Password" onChange={onChange} />
-			<button type="button" onClick={() => resetForm()}>
+			<button type="button" onClick={handleFormReset}>
 				Reset All
 			</button>
 			<button

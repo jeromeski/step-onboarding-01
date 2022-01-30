@@ -23,11 +23,6 @@ export default function CheckoutPage() {
 	const [formValues, setFormValues] = useState(initialValues);
 	const [showModal, setShowModal] = useState(false);
 
-	// useEffect(() => {
-	// 	if (onboardingData) {
-	// 		console.log(onboardingData);
-	// 	}
-	// }, [onboardingData]);
 
 	const goToPrev = () => {
 		if (currentIndex <= 0) {
@@ -68,7 +63,7 @@ export default function CheckoutPage() {
 							initialValues={initialValues}
 							formValues={formValues}
 							setFormValues={setFormValues}>
-							<FormStepOne />
+							<FormStepOne setFormValues={setFormValues} initialValues={initialValues} />
 							<FormStepTwo
 								goToPrev={goToPrev}
 								handleConfirm={handleConfirm}

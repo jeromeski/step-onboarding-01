@@ -29,11 +29,13 @@ export default function Modal({ children, showModal, setShowModal }) {
 				<ModalBackground onClick={() => setShowModal(false)}>
 					<ModalBody onClick={(e) => e.stopPropagation()}>
 						{children}
-						<button type="button" onClick={() => setShowModal(false)}>
-							Cancel
-						</button>
-						<div className="modal-footer p-5">
-							<button type="submit">Submit</button>
+						<div>
+							<div className="modal-footer p-5">
+								<button type="button" onClick={() => setShowModal(false)}>
+									Cancel
+								</button>
+								<button type="submit">Submit</button>
+							</div>
 						</div>
 					</ModalBody>
 				</ModalBackground>
